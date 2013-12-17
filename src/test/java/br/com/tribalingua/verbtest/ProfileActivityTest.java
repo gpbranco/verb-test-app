@@ -39,6 +39,6 @@ public class ProfileActivityTest {
 		ShadowActivity shadowActivity = shadowOf(activity);
 		Intent startedIntent = shadowActivity.getNextStartedActivity();
 		ShadowIntent shadowIntent = shadowOf(startedIntent);
-		assertThat(shadowIntent.getComponent().getClassName(), equalTo(ClassCategoriesListActivity.class.getName()));
+		assertThat(shadowIntent.getComponent().getClassName(), equalTo(CategoriesListActivity.class.getName()));
 	}
 }

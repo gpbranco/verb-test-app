@@ -9,9 +9,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>br.com.tribalingua</groupId>
 	<artifactId>verb-test</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>apk</packaging>
 	<name>verb-test - Application</name>
 	
@@ -60,6 +58,12 @@
             <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
+		
+        <dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>support-v4</artifactId>
+			<version>r6</version>
+		</dependency>
 		
 	</dependencies>
 	<build>

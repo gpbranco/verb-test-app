@@ -33,13 +33,13 @@ public class DefaultImageAdapter extends BaseAdapter {
     }
  
     public Object getItem(int position) {
-        return position;
+        return data.get(position);
     }
  
     public long getItemId(int position) {
         return position;
     }
- 
+    
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)

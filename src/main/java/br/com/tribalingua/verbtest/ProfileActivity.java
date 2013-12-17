@@ -14,9 +14,9 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.profile_activity);
 		
 		findViewById(R.id.teacherProfileButton).setOnClickListener(new View.OnClickListener() {
-	        @Override
+			
 	        public void onClick(View view) {
-	            startActivity(ClassCategoriesListActivity.class);
+	            startActivity(CategoriesListActivity.class);
 	        }
 	    });
 	}
