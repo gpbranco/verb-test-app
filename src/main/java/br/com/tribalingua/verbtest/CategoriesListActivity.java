@@ -1,6 +1,5 @@
 package br.com.tribalingua.verbtest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,12 +12,14 @@ import android.widget.ListView;
 import br.com.tribalingua.verbtest.adapter.DefaultImageAdapter;
 import br.com.tribalingua.verbtest.constants.ExtraConstants;
 import br.com.tribalingua.verbtest.model.Category;
+import br.com.tribalingua.verbtest.repository.ICategoryrepository;
+import br.com.tribalingua.verbtest.repository.RepositoryFactory;
 
 public class CategoriesListActivity extends Activity {
-
 	
 	ListView list;
     DefaultImageAdapter adapter;
+    ICategoryrepository repository = (ICategoryrepository)RepositoryFactory.get(ICategoryrepository.KEY);
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,10 +50,6 @@ public class CategoriesListActivity extends Activity {
     }
     
     private List<Category> loadCategories(){
-    	List<Category> categories = new ArrayList<Category>();
-    	
-    	categories.add(new Category(2, "Test", "http://test.com", "description"));
-    	
-    	return categories;
+    	return this.repository.loadAllCategories();
     }
 }

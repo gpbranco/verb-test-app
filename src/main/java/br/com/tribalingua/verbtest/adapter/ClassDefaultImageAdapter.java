@@ -54,7 +54,7 @@ public class ClassDefaultImageAdapter extends BaseAdapter {
 																				// image
 
 		GroupClass category = data.get(position);
-
+		artist.setText("Apply Test");
 		title.setText(category.getName());
 		duration.setText("");
 		imageLoader.DisplayImage(category.getThumbUrl(), thumb_image);

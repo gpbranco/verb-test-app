@@ -40,13 +40,27 @@ public class ImageLoader {
 	    {
 	        imageViews.put(imageView, url);
 	        Bitmap bitmap=memoryCache.get(url);
+	        
 	        if(bitmap!=null)
 	            imageView.setImageBitmap(bitmap);
 	        else
 	        {
+	        	if(isResource(url)){
+	        		int rsc_id = getIdFromResourceString(url);
+	        		imageView.setImageResource(rsc_id);
+	        	}else{
+	        		imageView.setImageResource(stub_id);
+	        	}
 	          //  queuePhoto(url, imageView);
-	            imageView.setImageResource(stub_id);
 	        }
+	    }
+	    
+	    private boolean isResource(String url){
+	    	return url != null && url.startsWith("RESOURCES:");
+	    }
+	    
+	    private int getIdFromResourceString(String url){
+	    	return Integer.parseInt(url.split(":")[1]);
 	    }
 	 
 	    private void queuePhoto(String url, ImageView imageView)

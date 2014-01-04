@@ -1,6 +1,5 @@
 package br.com.tribalingua.verbtest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,11 +12,15 @@ import android.widget.ListView;
 import br.com.tribalingua.verbtest.adapter.ClassDefaultImageAdapter;
 import br.com.tribalingua.verbtest.constants.ExtraConstants;
 import br.com.tribalingua.verbtest.model.GroupClass;
+import br.com.tribalingua.verbtest.repository.IGroupClassRepository;
+import br.com.tribalingua.verbtest.repository.RepositoryFactory;
 
 public class ClassListActivity extends Activity {
 
 	private ListView list;
     private ClassDefaultImageAdapter adapter;
+    private IGroupClassRepository repository = (IGroupClassRepository)RepositoryFactory.get(IGroupClassRepository.KEY);
+    private int categoryId;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,12 @@ public class ClassListActivity extends Activity {
  
         list=(ListView)findViewById(R.id.list);
  
+        Bundle b = getIntent().getExtras();
+        if(b!=null)
+        {
+        	categoryId = b.getInt(ExtraConstants.EXTRA_CATEGORY_ID);
+        }
+        
         adapter= new ClassDefaultImageAdapter(this, loadClasses());
         list.setAdapter(adapter);
  
@@ -48,9 +57,7 @@ public class ClassListActivity extends Activity {
     }
     
     private List<GroupClass> loadClasses(){
-    	List<GroupClass> classes = new ArrayList<GroupClass>();
-    	classes.add(new GroupClass(2, "Test", "path test"));
-    	return classes;
+    	return this.repository.loadAllGroupClass(categoryId);
     }
    	
 }

@@ -28,6 +28,11 @@
         <activity android:name=".ClassListActivity"></activity>
         <activity android:name=".ApplyTestActivity"></activity>
         <activity android:name=".StudentScoreActivity"></activity>
+        <activity android:name=".StudentLogActivity">
+             <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ProfileActivity" />
+        </activity>
     </application>
     
 </manifest>

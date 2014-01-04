@@ -21,6 +21,9 @@ import android.widget.TextView;
 import br.com.tribalingua.verbtest.constants.ExtraConstants;
 import br.com.tribalingua.verbtest.model.VerbContainer;
 import br.com.tribalingua.verbtest.model.VerbTest;
+import br.com.tribalingua.verbtest.repository.IApplyTestService;
+import br.com.tribalingua.verbtest.repository.InMemoryApplyTestService;
+import br.com.tribalingua.verbtest.repository.RepositoryFactory;
 
 public class ApplyTestActivity extends FragmentActivity {
 
@@ -29,14 +32,22 @@ public class ApplyTestActivity extends FragmentActivity {
 	private VerbTestCollectionPagerAdapter adapter;
 
 	ViewPager mViewPager;
+	
+	private int groupClassId;
+	
+	IApplyTestService service = (IApplyTestService)RepositoryFactory.get(InMemoryApplyTestService.KEY);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.verb_test_activity);
 		
-		loadVerbTest();
-		
+		Bundle b = getIntent().getExtras();
+		if (b != null) {
+			groupClassId = b.getInt(ExtraConstants.EXTRA_GROUP_CLASS_ID);
+		}
+
+		verbTest = service.randomVerbTest();
 		adapter = new VerbTestCollectionPagerAdapter(
 				getSupportFragmentManager(), verbTest);
 
@@ -56,6 +67,10 @@ public class ApplyTestActivity extends FragmentActivity {
 	public VerbTest getVerbTest(){
 		return this.verbTest;
 	}
+	
+	public int getGroupTestId(){
+		return this.groupClassId;
+	}
 
 	private void loadVerbTest() {
 		List<VerbContainer> verbs = new ArrayList<VerbContainer>();
@@ -64,6 +79,15 @@ public class ApplyTestActivity extends FragmentActivity {
 			VerbContainer container = new VerbContainer("I - "+i, "PS - "+i, "PP - "+i);
 			verbs.add(container);
 		}
+		
+		VerbContainer container = new VerbContainer("Broadcast", "Broadcast", "Broadcast");
+		verbs.add(container);
+		
+		container = new VerbContainer("See", "Saw", "Seen");
+		verbs.add(container);
+		
+		container = new VerbContainer("Cut", "Cut", "Cut");
+		verbs.add(container);
 		
 		VerbContainer dummy = new VerbContainer("Dummy", "", "");
 		verbs.add(dummy);
@@ -169,6 +193,7 @@ public class ApplyTestActivity extends FragmentActivity {
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), StudentScoreActivity.class);
             		intent.putExtra(ExtraConstants.EXTRA_VERB_TEST_ID, ((ApplyTestActivity)getActivity()).getVerbTest().getId());
+            		intent.putExtra(ExtraConstants.EXTRA_GROUP_CLASS_ID,  ((ApplyTestActivity)getActivity()).getGroupTestId());
             		startActivity(intent);					
 				}
 				
