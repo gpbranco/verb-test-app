@@ -1,10 +1,6 @@
 package br.com.tribalingua.verbtest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -72,30 +68,7 @@ public class ApplyTestActivity extends FragmentActivity {
 		return this.groupClassId;
 	}
 
-	private void loadVerbTest() {
-		List<VerbContainer> verbs = new ArrayList<VerbContainer>();
-		
-		for (int i = 0; i < 3; i++) {
-			VerbContainer container = new VerbContainer("I - "+i, "PS - "+i, "PP - "+i);
-			verbs.add(container);
-		}
-		
-		VerbContainer container = new VerbContainer("Broadcast", "Broadcast", "Broadcast");
-		verbs.add(container);
-		
-		container = new VerbContainer("See", "Saw", "Seen");
-		verbs.add(container);
-		
-		container = new VerbContainer("Cut", "Cut", "Cut");
-		verbs.add(container);
-		
-		VerbContainer dummy = new VerbContainer("Dummy", "", "");
-		verbs.add(dummy);
-		
-		verbTest = new VerbTest(1);
-		verbTest.addVerbs(verbs);
-	}
-
+	
 	/**
 	 * A {@link android.support.v4.app.FragmentStatePagerAdapter} that returns a
 	 * fragment representing an object in the collection.
@@ -137,7 +110,8 @@ public class ApplyTestActivity extends FragmentActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return Integer.toString(++position);
+			++position;
+			return getCount() == position ? "" : Integer.toString(position);
 		}
 		
 		private String transformToString(VerbContainer container){

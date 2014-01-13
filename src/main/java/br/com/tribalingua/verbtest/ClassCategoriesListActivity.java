@@ -31,7 +31,6 @@ public class ClassCategoriesListActivity extends Activity {
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
  
-            @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
  
@@ -42,7 +41,7 @@ public class ClassCategoriesListActivity extends Activity {
     private List<Category> loadCategories(){
     	List<Category> categories = new ArrayList<Category>();
     	
-    	categories.add(new Category("Test", "http://test.com", "description"));
+    	categories.add(new Category(0, "Test", "http://test.com", "description"));
     	
     	return categories;
     }

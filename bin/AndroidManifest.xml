@@ -28,6 +28,9 @@
         <activity android:name=".ClassListActivity"></activity>
         <activity android:name=".ApplyTestActivity"></activity>
         <activity android:name=".StudentScoreActivity"></activity>
+        <activity android:name=".ApplyTrainingTestActivity"></activity>
+        <activity android:name=".StudentModulelActivity"></activity>
+        <activity android:name=".StudentTrainingScoreActivity"></activity>
         <activity android:name=".StudentLogActivity">
              <meta-data
             android:name="android.support.PARENT_ACTIVITY"

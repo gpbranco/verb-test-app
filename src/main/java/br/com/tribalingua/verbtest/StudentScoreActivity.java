@@ -24,18 +24,18 @@ import br.com.tribalingua.verbtest.repository.IStudentScoreLogRepository;
 import br.com.tribalingua.verbtest.repository.RepositoryFactory;
 
 public class StudentScoreActivity extends FragmentActivity {
-	
-	AlertDialog dialog;
-	
-	ListView list;
-	StudentScoreImageAdapter adapter;
-	
-	private int currentPosition;
-	private int classId;
-	private IStudentRepository repository = (IStudentRepository)RepositoryFactory.get(IStudentRepository.KEY);
-	private IStudentScoreLogRepository studentLogRepository = (IStudentScoreLogRepository)RepositoryFactory.get(IStudentScoreLogRepository.KEY);
-	List<StudentScore> scores;
-	
+        
+        AlertDialog dialog;
+        
+        ListView list;
+        StudentScoreImageAdapter adapter;
+        
+        private int currentPosition;
+        private int classId;
+        private IStudentRepository repository = (IStudentRepository)RepositoryFactory.get(IStudentRepository.KEY);
+        private IStudentScoreLogRepository studentLogRepository = (IStudentScoreLogRepository)RepositoryFactory.get(IStudentScoreLogRepository.KEY);
+        List<StudentScore> scores;
+        
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,23 +57,23 @@ public class StudentScoreActivity extends FragmentActivity {
  
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-            	currentPosition = position;
-            	StudentScoreActivity.this.currentPosition = position;
-            	StudentScore student = (StudentScore)adapter.getItem(position);
-            	test();
+                    currentPosition = position;
+                    StudentScoreActivity.this.currentPosition = position;
+                    StudentScore student = (StudentScore)adapter.getItem(position);
+                    test();
             }
         });
         
         Button btn =  (Button)findViewById(R.id.doneBtn);
         btn.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				studentLogRepository.addLog(scores, classId);
-				Intent intent = new Intent();
-        		intent.putExtra(ExtraConstants.EXTRA_GROUP_CLASS_ID, classId);
-        		startActivity(StudentLogActivity.class, intent);
-			}
-		});
+                        
+                        public void onClick(View v) {
+                                studentLogRepository.addLog(scores, classId);
+                                Intent intent = new Intent();
+                        intent.putExtra(ExtraConstants.EXTRA_GROUP_CLASS_ID, classId);
+                        startActivity(StudentLogActivity.class, intent);
+                        }
+                });
     }
     
     private void startActivity(Class<? extends Activity> activityClass, Intent intent) {
@@ -82,66 +82,66 @@ public class StudentScoreActivity extends FragmentActivity {
     }
     
     private List<StudentScore> loadStudents(){
-    	 scores = this.repository.loadAllStudentsScore(classId);
-    	 return scores;
+             scores = this.repository.loadAllStudentsScore(classId);
+             return scores;
     }
-	public void test(){
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
-		// Add the buttons
-		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   lala();
-		           }
-		       });
-		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               // User cancelled the dialog
-		           }
-		       });
-		
-		final String[] nums = new String[10];
-		for(int i=0; i<nums.length; i++) {
-		   nums[i] = Integer.toString(i+1);
-		}
-		
-		NumberPicker numberPicker = new NumberPicker(this);//(NumberPicker)getLayoutInflater().inflate(R.layout.score_dialog, null);
-		numberPicker.setId(R.id.np);
-		numberPicker.setMaxValue(9);
-		numberPicker.setMinValue(0);
-		numberPicker.setValue(9);
-		numberPicker.setWrapSelectorWheel(true);
-		numberPicker.setDisplayedValues(nums);
-		
-		enableNumberPickerManualEditing(numberPicker, false);
-		
-		builder.setView(numberPicker);
-		dialog = builder.create();
-		dialog.show();
-	}
-	
-	public static void enableNumberPickerManualEditing(NumberPicker numPicker,
-	        boolean enable) {
-	    int childCount = numPicker.getChildCount();
+        public void test(){
+                
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                
+                // Add the buttons
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int id) {
+                                   lala();
+                           }
+                       });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int id) {
+                               // User cancelled the dialog
+                           }
+                       });
+                
+                final String[] nums = new String[10];
+                for(int i=0; i<nums.length; i++) {
+                   nums[i] = Integer.toString(i+1);
+                }
+                
+                NumberPicker numberPicker = new NumberPicker(this);//(NumberPicker)getLayoutInflater().inflate(R.layout.score_dialog, null);
+                numberPicker.setId(R.id.np);
+                numberPicker.setMaxValue(9);
+                numberPicker.setMinValue(0);
+                numberPicker.setValue(9);
+                numberPicker.setWrapSelectorWheel(true);
+                numberPicker.setDisplayedValues(nums);
+                
+                enableNumberPickerManualEditing(numberPicker, false);
+                
+                builder.setView(numberPicker);
+                dialog = builder.create();
+                dialog.show();
+        }
+        
+        public static void enableNumberPickerManualEditing(NumberPicker numPicker,
+                boolean enable) {
+            int childCount = numPicker.getChildCount();
 
-	    for (int i = 0; i < childCount; i++) {
-	        View childView = numPicker.getChildAt(i);
+            for (int i = 0; i < childCount; i++) {
+                View childView = numPicker.getChildAt(i);
 
-	        if (childView instanceof EditText) {
-	            EditText et = (EditText) childView;
-	            et.setFocusable(enable);
-	            return;
-	        }
-	    }
-	}
-	
-	private void lala(){
-		NumberPicker numberPicker = (NumberPicker)dialog.findViewById(R.id.np);
-		int num = numberPicker.getValue();
-		StudentScore score = (StudentScore) adapter.getItem(currentPosition);
-		score.setScore(num+1);
-		adapter.notifyDataSetChanged();
-	}
+                if (childView instanceof EditText) {
+                    EditText et = (EditText) childView;
+                    et.setFocusable(enable);
+                    return;
+                }
+            }
+        }
+        
+        private void lala(){
+                NumberPicker numberPicker = (NumberPicker)dialog.findViewById(R.id.np);
+                int num = numberPicker.getValue();
+                StudentScore score = (StudentScore) adapter.getItem(currentPosition);
+                score.setScore(num+1);
+                adapter.notifyDataSetChanged();
+        }
 
 }

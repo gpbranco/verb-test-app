@@ -22,7 +22,6 @@ public class VerbTest {
 	
 	public void addVerbs(List<VerbContainer> verbs){
 		this.verbs = verbs;
-		//Collections.copy(this.verbs, verbs);
 	}
 	
 	public VerbContainer getVerb(int position){
