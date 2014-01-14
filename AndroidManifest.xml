@@ -26,15 +26,23 @@
         
         <activity android:name=".CategoriesListActivity"></activity>
         <activity android:name=".ClassListActivity"></activity>
-        <activity android:name=".ApplyTestActivity"></activity>
+        <activity android:name=".ApplyTestActivity">
+             <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="br.com.tribalingua.verbtest.ProfileActivity" />
+        </activity>
         <activity android:name=".StudentScoreActivity"></activity>
-        <activity android:name=".ApplyTrainingTestActivity"></activity>
+        <activity android:name=".ApplyTrainingTestActivity">
+             <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="br.com.tribalingua.verbtest.ProfileActivity" />
+        </activity>
         <activity android:name=".StudentModulelActivity"></activity>
         <activity android:name=".StudentTrainingScoreActivity"></activity>
         <activity android:name=".StudentLogActivity">
              <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ProfileActivity" />
+            android:value="br.com.tribalingua.verbtest.ProfileActivity" />
         </activity>
     </application>
     

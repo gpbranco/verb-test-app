@@ -1,6 +1,7 @@
 package br.com.tribalingua.verbtest;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -65,6 +66,17 @@ public class ApplyTrainingTestActivity extends FragmentActivity {
 		service.startNewTrainingTest();
 		
 	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(ProfileActivity.class);
+		return true;
+	}
+	
+	private void startActivity(Class<? extends Activity> activityClass) {
+		Intent	intent = new Intent();
+        intent.setClassName(getPackageName(), activityClass.getName());
+        startActivity(intent);
+    }
 	
 	public VerbTest getVerbTest(){
 		return this.verbTest;

@@ -2,12 +2,14 @@ package br.com.tribalingua.verbtest;
 
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -74,7 +76,16 @@ public class StudentScoreActivity extends FragmentActivity {
                         startActivity(StudentLogActivity.class, intent);
                         }
                 });
+        
+        final ActionBar actionBar = getActionBar();
+
+		actionBar.setDisplayHomeAsUpEnabled(true);
     }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(ProfileActivity.class, new Intent());
+		return true;
+	}
     
     private void startActivity(Class<? extends Activity> activityClass, Intent intent) {
         intent.setClassName(getPackageName(), activityClass.getName());

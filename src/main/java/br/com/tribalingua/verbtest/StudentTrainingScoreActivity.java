@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -52,6 +53,11 @@ public class StudentTrainingScoreActivity extends FragmentActivity {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(adapter);
     }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(ProfileActivity.class, new Intent());
+		return true;
+	}
     
     private void startActivity(Class<? extends Activity> activityClass, Intent intent) {
         intent.setClassName(getPackageName(), activityClass.getName());
@@ -127,22 +133,15 @@ public class StudentTrainingScoreActivity extends FragmentActivity {
 			
 			View rootView = inflater.inflate(R.layout.fragment_score_training, container, false);
 			
-			TextView edtRightInfinitive = (TextView)rootView.findViewById(R.id.edtRightInfinitive);
 			TextView edtRightPastSimple = (TextView)rootView.findViewById(R.id.edtRightPastSimple);
 			TextView edtRightPastParticiple = (TextView)rootView.findViewById(R.id.edtRightPastParticiple);
 			
-			edtRightInfinitive.setText(getAnswerOrDefault(answer[INFINITIVE]));
 			edtRightPastSimple.setText(getAnswerOrDefault(answer[PAST_SIMPLE]));
 			edtRightPastParticiple.setText(getAnswerOrDefault(answer[PAST_PARTICIPLE]));
 			
-			edtRightInfinitive.setTextColor(Color.GREEN);
 			edtRightPastSimple.setTextColor(Color.GREEN);
 			edtRightPastParticiple.setTextColor(Color.GREEN);
 			
-			TextView edtInfinitive = (TextView)rootView.findViewById(R.id.edtWrongInfinitive);
-			edtInfinitive.setText(answer[INFINITIVE]);
-			edtInfinitive.setTextColor(Color.GREEN);
-
 			TextView edtPastSimple = (TextView)rootView.findViewById(R.id.edtWrongPastSimple);
 			
 			if(isWrong(answer, WRONG_PAST_SIMPLE))
@@ -169,7 +168,7 @@ public class StudentTrainingScoreActivity extends FragmentActivity {
 		}
 		
 		private String getAnswerOrDefault(String value){
-			return "".equals(value) ? "Not Informed" : value;
+			return "".equals(value) ? "BLANK" : value;
 		}
     }
 

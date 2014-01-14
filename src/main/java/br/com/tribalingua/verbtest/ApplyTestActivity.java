@@ -1,6 +1,7 @@
 package br.com.tribalingua.verbtest;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -47,17 +49,24 @@ public class ApplyTestActivity extends FragmentActivity {
 		adapter = new VerbTestCollectionPagerAdapter(
 				getSupportFragmentManager(), verbTest);
 
-		// Set up action bar.
 		final ActionBar actionBar = getActionBar();
-
-		// Specify that the Home button should show an "Up" caret, indicating
-		// that touching the
-		// button will take the user one step up in the application's hierarchy.
+		
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		// Set up the ViewPager, attaching the adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(adapter);
+	}
+	
+	private void startActivity(Class<? extends Activity> activityClass) {
+		Intent	intent = new Intent();
+        intent.setClassName(getPackageName(), activityClass.getName());
+        startActivity(intent);
+    }
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(ProfileActivity.class);
+		return true;
 	}
 	
 	public VerbTest getVerbTest(){
